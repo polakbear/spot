@@ -5,9 +5,9 @@ import {
   Resolvers,
 } from '../types';
 import fetch from 'node-fetch';
-import {config} from '../../../config/config';
-import {JsonDB} from 'node-json-db';
-import {Config} from 'node-json-db/dist/lib/JsonDBConfig';
+import { config } from '../../../config/config';
+import { JsonDB } from 'node-json-db';
+import { Config } from 'node-json-db/dist/lib/JsonDBConfig';
 import _ from 'lodash';
 
 interface TrackSpotify {
@@ -38,7 +38,7 @@ export const recommendations: Resolvers['Query']['recommendations'] = (
     .then((resp) => {
       const response = JSON.parse(resp);
       const expires = new Date();
-      expires.setHours(expires.getHours() + 1)
+      expires.setHours(expires.getHours() + 1);
       db.push('token', response.access_token);
       // db.push('expires', expires);
     });
