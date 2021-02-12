@@ -147,11 +147,6 @@ export type QueryArtistsArgs = {
 };
 
 
-export type QueryGenresArgs = {
-  searchString: Scalars['String'];
-};
-
-
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -338,7 +333,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   recommendations?: Resolver<Maybe<ResolversTypes['RecommendationsResult']>, ParentType, ContextType, RequireFields<QueryRecommendationsArgs, 'seedTracks' | 'seedGenres' | 'seedArtists'>>;
   songs?: Resolver<Maybe<ResolversTypes['SongsResult']>, ParentType, ContextType, RequireFields<QuerySongsArgs, 'searchString'>>;
   artists?: Resolver<Maybe<ResolversTypes['ArtistsResult']>, ParentType, ContextType, RequireFields<QueryArtistsArgs, 'searchString'>>;
-  genres?: Resolver<Maybe<ResolversTypes['GenresResult']>, ParentType, ContextType, RequireFields<QueryGenresArgs, 'searchString'>>;
+  genres?: Resolver<Maybe<ResolversTypes['GenresResult']>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {

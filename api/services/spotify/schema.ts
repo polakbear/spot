@@ -99,6 +99,6 @@ export const typeDefs = gql`
     ): RecommendationsResult
     songs(searchString: String!): SongsResult
     artists(searchString: String!): ArtistsResult
-    genres(searchString: String!): GenresResult
+    genres: GenresResult
   }
 `;
