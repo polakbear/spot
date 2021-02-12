@@ -1,0 +1,8 @@
+overwrite: true
+documents: null
+generates:
+  services/spotify/types.ts:
+    schema: "./services/spotify/schema.ts"
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
