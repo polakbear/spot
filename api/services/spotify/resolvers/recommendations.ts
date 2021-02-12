@@ -5,9 +5,9 @@ import {
   Resolvers,
 } from '../types';
 import fetch from 'node-fetch';
-import { config } from '../../../config/config';
-import { JsonDB } from 'node-json-db';
-import { Config } from 'node-json-db/dist/lib/JsonDBConfig';
+import {config} from '../../../config/config';
+import {JsonDB} from 'node-json-db';
+import {Config} from 'node-json-db/dist/lib/JsonDBConfig';
 import _ from 'lodash';
 
 interface TrackSpotify {
@@ -15,7 +15,7 @@ interface TrackSpotify {
   name: string;
 }
 
-const db = new JsonDB(new Config('tokendb', true, false, '/'));
+const db = new JsonDB(new Config('../tokendb', true, false, '/'));
 
 export const recommendations: Resolvers['Query']['recommendations'] = (
   parent: any,
@@ -23,24 +23,26 @@ export const recommendations: Resolvers['Query']['recommendations'] = (
 ) => {
   //@todo: extract token
   const token = db.getData('token');
-  if (!token) {
-    fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Basic ${Buffer.from(
-          `${config.clientId}:${config.clientSecret}`,
-        ).toString('base64')}`,
-      },
-      body: 'grant_type=client_credentials',
-    })
-      .then((resp) => resp.text())
-      .then((resp) => {
-        const response = JSON.parse(resp);
-        db.push('token', response.access_token);
-        console.log('pushed to db ' + response.access_token);
-      });
-  }
+  // if (!token) {
+  fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${Buffer.from(
+        `${config.clientId}:${config.clientSecret}`,
+      ).toString('base64')}`,
+    },
+    body: 'grant_type=client_credentials',
+  })
+    .then((resp) => resp.text())
+    .then((resp) => {
+      const response = JSON.parse(resp);
+      const expires = new Date();
+      expires.setHours(expires.getHours() + 1)
+      db.push('token', response.access_token);
+      // db.push('expires', expires);
+    });
+  // }
 
   const spot = new SpotifyWebApi();
   spot.setAccessToken(db.getData('token'));
@@ -56,7 +58,7 @@ export const recommendations: Resolvers['Query']['recommendations'] = (
     audioOptions[key] = value;
   });
 
-  console.log(audioOptions);
+  // console.log(audioOptions);
 
   const result = spot.getRecommendations(audioOptions).then((resp) => {
     const res: RecommendationsConnection = {
