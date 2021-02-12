@@ -1,6 +1,12 @@
 import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
+  type Image {
+    height: Int
+    url: String
+    width: Int
+  }
+
   type Track {
     id: String
     album(full: Int): Album
@@ -24,6 +30,7 @@ export const typeDefs = gql`
     name: String
     type: String
     uri: String
+    images: [Image]
   }
 
   type Album {
@@ -33,12 +40,6 @@ export const typeDefs = gql`
     href: String
     label: String
     name: String
-  }
-
-  type Image {
-    height: Int
-    url: String
-    width: Int
   }
 
   type RecommendationsResult {

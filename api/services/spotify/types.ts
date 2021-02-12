@@ -13,6 +13,13 @@ export type Scalars = {
   Float: number;
 };
 
+export type Image = {
+  __typename?: 'Image';
+  height?: Maybe<Scalars['Int']>;
+  url?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['Int']>;
+};
+
 export type Track = {
   __typename?: 'Track';
   id?: Maybe<Scalars['String']>;
@@ -49,6 +56,7 @@ export type Artist = {
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   uri?: Maybe<Scalars['String']>;
+  images?: Maybe<Array<Maybe<Image>>>;
 };
 
 export type Album = {
@@ -59,13 +67,6 @@ export type Album = {
   href?: Maybe<Scalars['String']>;
   label?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-};
-
-export type Image = {
-  __typename?: 'Image';
-  height?: Maybe<Scalars['Int']>;
-  url?: Maybe<Scalars['String']>;
-  width?: Maybe<Scalars['Int']>;
 };
 
 export type RecommendationsResult = {
@@ -224,13 +225,13 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Track: ResolverTypeWrapper<Track>;
-  String: ResolverTypeWrapper<Scalars['String']>;
+  Image: ResolverTypeWrapper<Image>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  String: ResolverTypeWrapper<Scalars['String']>;
+  Track: ResolverTypeWrapper<Track>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Artist: ResolverTypeWrapper<Artist>;
   Album: ResolverTypeWrapper<Album>;
-  Image: ResolverTypeWrapper<Image>;
   RecommendationsResult: ResolverTypeWrapper<RecommendationsResult>;
   SongsResult: ResolverTypeWrapper<SongsResult>;
   ArtistsResult: ResolverTypeWrapper<ArtistsResult>;
@@ -243,13 +244,13 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Track: Track;
-  String: Scalars['String'];
+  Image: Image;
   Int: Scalars['Int'];
+  String: Scalars['String'];
+  Track: Track;
   Boolean: Scalars['Boolean'];
   Artist: Artist;
   Album: Album;
-  Image: Image;
   RecommendationsResult: RecommendationsResult;
   SongsResult: SongsResult;
   ArtistsResult: ArtistsResult;
@@ -258,6 +259,13 @@ export type ResolversParentTypes = {
   AudioFeatures: AudioFeatures;
   Float: Scalars['Float'];
   Query: {};
+};
+
+export type ImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']> = {
+  height?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  width?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type TrackResolvers<ContextType = any, ParentType extends ResolversParentTypes['Track'] = ResolversParentTypes['Track']> = {
@@ -284,6 +292,7 @@ export type ArtistResolvers<ContextType = any, ParentType extends ResolversParen
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   uri?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['Image']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -294,13 +303,6 @@ export type AlbumResolvers<ContextType = any, ParentType extends ResolversParent
   href?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']> = {
-  height?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  width?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -337,10 +339,10 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type Resolvers<ContextType = any> = {
+  Image?: ImageResolvers<ContextType>;
   Track?: TrackResolvers<ContextType>;
   Artist?: ArtistResolvers<ContextType>;
   Album?: AlbumResolvers<ContextType>;
-  Image?: ImageResolvers<ContextType>;
   RecommendationsResult?: RecommendationsResultResolvers<ContextType>;
   SongsResult?: SongsResultResolvers<ContextType>;
   ArtistsResult?: ArtistsResultResolvers<ContextType>;
