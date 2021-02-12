@@ -11,7 +11,6 @@ export const artists: Resolvers['Query']['artists'] = (
   spot.setAccessToken(token);
 
   return spot.searchArtists(args.searchString).then((resp) => {
-    console.log(resp.body.artists.items[0]);
     const res: ArtistsResult = {
       artists: resp.body.artists.items.map((artist) => {
         return {
