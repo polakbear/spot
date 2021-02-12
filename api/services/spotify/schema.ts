@@ -41,15 +41,15 @@ export const typeDefs = gql`
     width: Int
   }
 
-  type RecommendationsConnection {
+  type RecommendationsResult {
     tracks: [Track]
   }
 
-  type SongsConnection {
+  type SongsResult {
     tracks: [Track]
   }
 
-  type ArtistsConnection {
+  type ArtistsResult {
     artists: [Artist]
   }
 
@@ -57,7 +57,7 @@ export const typeDefs = gql`
     name: String
   }
 
-  type GenresConnection {
+  type GenresResult {
     genres: [Genre]
   }
   input AudioFeatures {
@@ -96,9 +96,9 @@ export const typeDefs = gql`
       seedGenres: [String]!
       seedArtists: [String]!
       audioFeatures: AudioFeatures
-    ): RecommendationsConnection
-    songs(searchString: String!): SongsConnection
-    artists(searchString: String!): ArtistsConnection
-    genres(searchString: String!): GenresConnection
+    ): RecommendationsResult
+    songs(searchString: String!): SongsResult
+    artists(searchString: String!): ArtistsResult
+    genres(searchString: String!): GenresResult
   }
 `;

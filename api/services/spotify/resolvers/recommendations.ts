@@ -1,7 +1,7 @@
 import SpotifyWebApi from 'spotify-web-api-node';
 import {
   QueryRecommendationsArgs,
-  RecommendationsConnection,
+  RecommendationsResult,
   Resolvers,
 } from '../types';
 import fetch from 'node-fetch';
@@ -61,7 +61,7 @@ export const recommendations: Resolvers['Query']['recommendations'] = (
   // console.log(audioOptions);
 
   const result = spot.getRecommendations(audioOptions).then((resp) => {
-    const res: RecommendationsConnection = {
+    const res: RecommendationsResult = {
       tracks: resp.body.tracks.map((track) => {
         return {
           id: track.id,
