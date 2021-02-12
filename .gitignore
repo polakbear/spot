@@ -1,4 +1,4 @@
 .idea
-node_modules
 dist
 api/config/config.ts
+api/node_modules
