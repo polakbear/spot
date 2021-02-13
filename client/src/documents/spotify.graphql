@@ -1,0 +1,19 @@
+query getGenres {
+    genres {
+        genres {
+            name
+        }
+    }
+}
+
+query searchArtists ($searchString: String!) {
+    artists(searchString: $searchString) {
+        artists {
+            id
+            images {
+                url
+            }
+            name
+        }
+    }
+}
