@@ -10,4 +10,4 @@ new ApolloServer({
   context: (expressContext) => ({
     accessToken: expressContext.req.header('accessToken'),
   }),
-}).applyMiddleware({ app: initApp(config.port) });
+}).applyMiddleware({ app: initApp(config.port), cors: false });

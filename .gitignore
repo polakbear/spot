@@ -1,4 +1,17 @@
+# ide
 .idea
-dist
+
+# server
+api/dist
 api/config/config.ts
 api/node_modules
+
+# client
+client/node_modules
+client/.pnp
+client/.pnp.js
+client/build
+client/.DS_Store
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*

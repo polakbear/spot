@@ -1,0 +1,106 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+type Album {
+    artists: [Artist]
+    available_markets: [String]
+    href: String
+    id: String
+    label: String
+    name: String
+}
+
+type Artist {
+    href: String
+    id: String
+    images: [Image]
+    name: String
+    type: String
+    uri: String
+}
+
+type ArtistsResult {
+    artists: [Artist]
+}
+
+type Genre {
+    name: String
+}
+
+type GenresResult {
+    genres: [Genre]
+}
+
+type Image {
+    height: Int
+    url: String
+    width: Int
+}
+
+type Query {
+    _service: _Service!
+    artists(searchString: String!): ArtistsResult
+    genres: GenresResult
+    recommendations(audioFeatures: AudioFeatures, seedArtists: [String]!, seedGenres: [String]!, seedTracks: [String]!): RecommendationsResult
+    songs(searchString: String!): SongsResult
+}
+
+type RecommendationsResult {
+    tracks: [Track]
+}
+
+type SongsResult {
+    tracks: [Track]
+}
+
+type Track {
+    album(full: Int): Album
+    artists(full: Int, throttle: Int): [Artist]
+    available_markets: [String]
+    disc_number: Int
+    duration_ms: Int
+    explicit: Boolean
+    href: String
+    id: String
+    name: String
+    popularity: Int
+    preview_url: String
+    track_number: Int
+    type: String
+    uri: String
+}
+
+type _Service {
+    "The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied"
+    sdl: String
+}
+
+input AudioFeatures {
+    analysis_url: String
+    duration_ms: Int
+    id: String
+    key: Int
+    max__speechiness: Float
+    max_acousticness: Float
+    max_danceability: Float
+    max_energy: Float
+    max_instrumentalness: Float
+    max_liveness: Float
+    max_loudness: Float
+    max_popularity: Int
+    max_valence: Float
+    min_acousticness: Float
+    min_danceability: Float
+    min_energy: Float
+    min_instrumentalness: Float
+    min_liveness: Float
+    min_loudness: Float
+    min_popularity: Int
+    min_speechiness: Float
+    min_valence: Float
+    mode: Int
+    tempo: Int
+}
